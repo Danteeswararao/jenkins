@@ -27,7 +27,7 @@ pipeline
                 }
             }
         }
-        stage(‘Load’) {
+        stage('Load') {
             steps{
                 script {
                     app = docker.build("dantesh/simple-spring")
@@ -36,10 +36,10 @@ pipeline
             }
             post{
                 success{
-                    echo "Docker Login Success"
+                    echo "Docker Image created Successfully"
                 }
                 failure{
-                    echo "Docker Login Failed"
+                    echo "Docker Image not created Successfully"
                 }
         
             }        
