@@ -29,9 +29,16 @@ pipeline
         }
         stage('Load') {
             steps{
-                script {
+                /*script {
                     app = docker.build("dantesh/simple-spring")
                     }
+                }*/
+                node {  
+                    checkout scm
+                    def customImage = docker.build("dantesh/simple-spring")
+                    /* Push the container to the custom Registry */
+                    customImage.push()
+                    customImage.push('latest')
                 }
             post{
                 success{
