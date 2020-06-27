@@ -6,27 +6,19 @@ pipeline
         registryCredential = "DOCKER"
     }
     agent any
-    /*tools {
+    tools {
         maven 'maven-app'
-    }*/
+    }
     stages {
-        
-        /*stage('Env')
-        {
-            def dockerHome = tool 'docker-app'
-            def mavenHome  = tool 'maven-app'
-            env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-        } */
+       
         stage ('Initialize') {
-            /*steps {
+            steps {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
-            }*/
-            def dockerHome = tool 'docker-app'
-            def mavenHome  = tool 'maven-app'
-            env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+            }
+          
         }
         stage ('Build') {
            steps {
