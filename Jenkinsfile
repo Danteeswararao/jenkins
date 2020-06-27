@@ -5,13 +5,18 @@ pipeline
     {
         registryCredential = "DOCKER"
     }
-    agent {
-        label 'docker' 
-    }
+    agent any
     tools {
         maven 'maven-app'
     }
     stages {
+        
+        /*stage('Env')
+        {
+            def dockerHome = tool 'docker-app'
+            def mavenHome  = tool 'maven-app'
+            env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+        } */
         stage ('Initialize') {
             steps {
                 sh '''
