@@ -6,7 +6,7 @@ pipeline
     }
     agent any
     tools {
-        maven 'maven-app'
+        maven 'maven-app',
         docker 'docker-app'
     }
     stages {
