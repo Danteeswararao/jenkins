@@ -11,12 +11,12 @@ pipeline
     }
     stages {
         
-        /*stage('Env')
+        stage('Env')
         {
             def dockerHome = tool 'docker-app'
             def mavenHome  = tool 'maven-app'
             env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-        } */
+        } 
         stage ('Initialize') {
             steps {
                 sh '''
