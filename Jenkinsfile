@@ -4,7 +4,7 @@ pipeline
     {
         registryCredential = "DOCKER"
     }
-    agent any
+    agent { dockerfile true }
     tools {
         maven 'maven-app'
     }
@@ -29,17 +29,17 @@ pipeline
         }
         stage('Load') {
             steps{
-                /*script {
+                script {
                     app = docker.build("dantesh/simple-spring")
                     }
-                }*/
-                node {  
+                }
+                /*node {  
                     checkout scm
                     def customImage = docker.build("dantesh/simple-spring")
-                    /* Push the container to the custom Registry */
+                    /* Push the container to the custom Registry 
                     customImage.push()
                     customImage.push('latest')
-                }
+                }*/
             post{
                 success{
                     echo "Docker Image created Successfully"
