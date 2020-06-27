@@ -33,7 +33,6 @@ pipeline
                     app = docker.build("dantesh/simple-spring")
                     }
                 }
-            }
             post{
                 success{
                     echo "Docker Image created Successfully"
@@ -41,8 +40,9 @@ pipeline
                 failure{
                     echo "Docker Image not created Successfully"
                 }
+            }    
         
-            }        
-        }
+        }        
     }
 }
+
