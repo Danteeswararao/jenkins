@@ -22,5 +22,22 @@ pipeline {
                 }
             }
         }
+        stage('Docker'){
+            steps {withCredentials([usernamePassword(credentialsId:'DOCKER',passwordVariable:'Itsmedantesh@42',usernameVariable:'dantesh')]) {
+                sh '''
+                    docker login -u ${usernameVariable} -p ${passwordVariable}
+                '''
+            }
+            }
+            post{
+                success{
+                    echo "Docker Login Success"
+                }
+                failure{
+                    echo "Docker Login Failed"
+                }
+        
+            }        
+        }
     }
 }
