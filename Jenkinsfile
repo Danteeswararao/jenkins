@@ -37,7 +37,8 @@ pipeline
                 script {
                     agent {
                         docker {
-                            app = docker.build("dantesh/simple-spring")
+                            label 'docker'
+                            def app = docker.build("dantesh/simple-spring")
                             }
                          }
                     
