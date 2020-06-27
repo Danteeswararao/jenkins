@@ -23,11 +23,14 @@ pipeline {
             }
         }
         stage('Docker'){
-            steps {withCredentials([usernamePassword(credentialsId:'DOCKER',passwordVariable:'Itsmedantesh@42',usernameVariable:'dantesh')]) {
-                sh '''
-                    docker login -u ${usernameVariable} -p ${passwordVariable}
-                '''
-            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'DOCKER', passwordVariable: 'pass', usernameVariable: 'user')]) 
+                {
+                    // the code in here can access $pass and $user
+                    sh """
+                        docker login -u $user -p $pass
+                    """
+                }
             }
             post{
                 success{
