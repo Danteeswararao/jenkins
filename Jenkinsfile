@@ -1,4 +1,9 @@
-pipeline {
+pipeline 
+{
+    environment 
+    {
+        registryCredential = "DOCKER"
+    }
     agent any
     tools {
         maven 'maven-app'
@@ -14,7 +19,7 @@ pipeline {
         }
         stage ('Build') {
            steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
             }
             post {
                 success {
@@ -22,14 +27,11 @@ pipeline {
                 }
             }
         }
-        stage('Docker'){
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'DOCKER', passwordVariable: 'pass', usernameVariable: 'user')]) 
-                {
-                    // the code in here can access $pass and $user
-                    sh """
-                        docker login -u $user -p $pass
-                    """
+        stage(‘Load’) {
+            steps{
+                script {
+                    app = docker.build("dantesh/simple-spring")
+                    }
                 }
             }
             post{
