@@ -4,7 +4,9 @@ pipeline
     {
         registryCredential = "DOCKER"
     }
-    agent any
+    agent {
+        label 'master'
+    }
     tools {
         maven 'maven-app'
     }
