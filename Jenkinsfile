@@ -1,18 +1,14 @@
-
 pipeline 
 {
     environment 
     {
         registryCredential = "DOCKER"
     }
-    agent {
-        label 'docker'
-    }
+    agent any
     tools {
         maven 'maven-app'
     }
     stages {
-       
         stage ('Initialize') {
             steps {
                 sh '''
@@ -20,7 +16,6 @@ pipeline
                     echo "M2_HOME = ${M2_HOME}"
                 '''
             }
-          
         }
         stage ('Build') {
            steps {
@@ -35,13 +30,7 @@ pipeline
         stage('Load') {
             steps{
                 script {
-                    agent {
-                        docker {
-                            label 'docker'
-                            def app = docker.build("dantesh/simple-spring")
-                            }
-                         }
-                    
+                    app = docker.build("dantesh/simple-spring")
                     }
                 }
             post{
@@ -56,3 +45,4 @@ pipeline
         }        
     }
 }
+
