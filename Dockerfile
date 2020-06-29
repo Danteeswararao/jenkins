@@ -1,5 +1,4 @@
 FROM openjdk:8-jdk-alpine
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
-EXPOSE 8888
-ENTRYPOINT ["java","-jar","-Dserver.port=8888","/app.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
